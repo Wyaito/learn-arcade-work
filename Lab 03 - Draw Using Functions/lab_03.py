@@ -1,15 +1,49 @@
 import arcade
 import tkinter
 
+#main function
+def main():
+    colorSelectPrompt()
+    arcade.open_window(600, 600, "Fish Under The Sun")
+    skyBack()
+    # getting ready to draw
+    arcade.start_render()
+    #drawing
+    drawSun(300, 350)
+    drawWater(400, 175)
+    drawFish(300, 160)
+    # finish drawing
+    arcade.finish_render()
+    # keeping the window open
+    arcade.run()
 
-arcade.open_window(600, 600, "Drawing")
+# function that lets you choose what color the sky is
+def colorSelectPrompt():
+    print("What color would you like the sky to be?")
+    print("1. orange")
+    print("2. red")
+    print("3. black")
+    print("4. blue")
+
+    skyColor = input("Type the number of the color you want : ")
+    global endColor
+    if skyColor == "1":
+        endColor = arcade.csscolor.DARK_ORANGE
+    if skyColor == "2":
+        endColor = arcade.csscolor.RED
+    if skyColor == "3":
+        endColor = arcade.color.BLACK
+    if skyColor == "4":
+        endColor = arcade.color.SKY_BLUE
+    else:
+        endColor = arcade.csscolor.RED
+        return
+    return endColor
+
 #function to draw the sky or background color
 def skyBack():
     #setting background color
-    arcade.set_background_color((253, 94, 63))
-skyBack()
-#getting ready to draw
-arcade.start_render()
+    arcade.set_background_color((endColor))
 
 #function to draw the sun
 def drawSun(x,y):
@@ -28,14 +62,13 @@ def drawSun(x,y):
     arcade.draw_ellipse_filled(x, y, 350, 240, arcade.csscolor.YELLOW)
 
     #center of sun is (300,350)
-drawSun(400,400)
 
 # function to draw water
 def drawWater(x,y):
     #drawing the water
     arcade.draw_lrtb_rectangle_filled(x - 400, x + 400 , y + 175, y - 175, arcade.color.CORNFLOWER_BLUE)
     #middle of water rectangle is (400, 175)
-drawWater(400, 175)
+
 
 #function to draw a fish
 def drawFish(x,y):
@@ -56,9 +89,5 @@ def drawFish(x,y):
     arcade.draw_arc_filled(x + 120, y - 15, 25, -20, arcade.csscolor.BLACK, 0, 180)
 
     #center of the fish is (300, 160)
-drawFish(300, 160)
 
-#finish drawing
-arcade.finish_render()
-#keeping the window open
-arcade.run()
+main()
