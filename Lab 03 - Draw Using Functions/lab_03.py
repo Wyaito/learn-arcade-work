@@ -1,5 +1,5 @@
 import arcade
-import tkinter
+
 
 #main function
 def main():
