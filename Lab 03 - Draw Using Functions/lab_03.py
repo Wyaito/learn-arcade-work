@@ -1,0 +1,64 @@
+import arcade
+import tkinter
+
+
+arcade.open_window(600, 600, "Drawing")
+#function to draw the sky or background color
+def skyBack():
+    #setting background color
+    arcade.set_background_color((253, 94, 63))
+skyBack()
+#getting ready to draw
+arcade.start_render()
+
+#function to draw the sun
+def drawSun(x,y):
+    #drawing the sun
+
+    #suns beautiful rays
+    arcade.draw_line(x, y - 110, x, y + 150, arcade.csscolor.YELLOW, 8)
+    arcade.draw_line(x, y - 110, x - 80, y + 130, arcade.csscolor.YELLOW, 8)
+    arcade.draw_line(x, y - 110, x + 80, y + 130, arcade.csscolor.YELLOW, 8)
+    arcade.draw_line(x, y - 110, x + 140, y + 100, arcade.csscolor.YELLOW, 8)
+    arcade.draw_line(x, y - 110, x - 140, y + 100, arcade.csscolor.YELLOW, 8)
+    arcade.draw_line(x, y - 50, x + 190, y + 50, arcade.csscolor.YELLOW, 8)
+    arcade.draw_line(x, y - 50, x - 190, y + 50, arcade.csscolor.YELLOW, 8)
+
+    #sun base
+    arcade.draw_ellipse_filled(x, y, 350, 240, arcade.csscolor.YELLOW)
+
+    #center of sun is (300,350)
+drawSun(400,400)
+
+# function to draw water
+def drawWater(x,y):
+    #drawing the water
+    arcade.draw_lrtb_rectangle_filled(x - 400, x + 400 , y + 175, y - 175, arcade.color.CORNFLOWER_BLUE)
+    #middle of water rectangle is (400, 175)
+drawWater(400, 175)
+
+#function to draw a fish
+def drawFish(x,y):
+    #drawing the fish
+
+    #tail fin
+    arcade.draw_triangle_filled(x - 220, y + 70, x - 135, y, x - 220, y - 70, arcade.csscolor.DARK_SALMON)
+    #body
+    arcade.draw_ellipse_filled(x, y, 300, 150, arcade.csscolor.DARK_SALMON)
+
+    #body fin
+    arcade.draw_line(x - 30, y + 15, x - 70, y + 25, arcade.csscolor.BLACK, 2)
+    arcade.draw_line(x - 70, y + 25, x - 70, y - 25, arcade.csscolor.BLACK, 2)
+    arcade.draw_line(x - 70, y - 25, x - 30, y - 10, arcade.csscolor.BLACK, 2)
+
+    #eye and mouth
+    arcade.draw_circle_filled(x + 100, y + 30, 10, arcade.csscolor.BLACK)
+    arcade.draw_arc_filled(x + 120, y - 15, 25, -20, arcade.csscolor.BLACK, 0, 180)
+
+    #center of the fish is (300, 160)
+drawFish(300, 160)
+
+#finish drawing
+arcade.finish_render()
+#keeping the window open
+arcade.run()
