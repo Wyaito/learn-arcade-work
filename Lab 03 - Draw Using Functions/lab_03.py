@@ -35,9 +35,6 @@ def colorSelectPrompt():
         endColor = arcade.color.BLACK
     if skyColor == "4":
         endColor = arcade.color.SKY_BLUE
-    else:
-        endColor = arcade.csscolor.RED
-        return
     return endColor
 
 #function to draw the sky or background color
