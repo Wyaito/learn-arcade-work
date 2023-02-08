@@ -11,7 +11,8 @@ def main():
     #drawing
     drawSun(300, 350)
     drawWater(400, 175)
-    drawFish(300, 160)
+    drawFish(240, 75)
+    drawFish(300, 260)
     # finish drawing
     arcade.finish_render()
     # keeping the window open
