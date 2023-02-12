@@ -78,7 +78,7 @@ def main():
         elif userChoice == 'D':
             camelTiredness = 0
             print('your camel is happy')
-            distanceNativesTraveled = distanceNativesTraveled + random.randint(7,14)
+            distanceNativesTraveled = distanceNativesTraveled + random.randint(7,16)
 
 
         #travel selections
@@ -88,7 +88,7 @@ def main():
             print('You traveled',fullSpeedTravelDistance, 'miles')
             thirst += 1
             camelTiredness += random.randint(1,3)
-            distanceNativesTraveled = distanceNativesTraveled + random.randint(7,14)
+            distanceNativesTraveled = distanceNativesTraveled + random.randint(7,15)
 
         elif userChoice == 'B':
             moderateSpeedTravelDistance = random.randint(5,12)
@@ -130,11 +130,13 @@ def main():
             print('The natives caught you!')
             print('GAME OVER')
             done = True
+            break
 
         #check to see if you won
         if milesTraveled > 199:
             print('YOU ESCAPED AND WON THE GAME!')
             done = True
+            break
 
 
         #vital checks
