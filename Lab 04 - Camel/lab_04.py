@@ -21,18 +21,18 @@ def main():
     while done==False:
 
 
-        if thirst > 6:
-            print('YOU DIED OF THIRST!')
-            done = True
-            break
-        elif thirst > 4:
-            print('You are thirsty!')
-        if camelTiredness > 8:
-            print('Your camel is dead')
-            done = True
-        elif camelTiredness > 5:
-            print('Your camel is getting tired')
-
+        # if thirst > 6:
+        #     print('YOU DIED OF THIRST!')
+        #     done = True
+        #     break
+        # elif thirst > 4:
+        #     print('You are thirsty!')
+        # if camelTiredness > 8:
+        #     print('Your camel is dead')
+        #     done = True
+        # elif camelTiredness > 5:
+        #     print('Your camel is getting tired')
+        #
 
 
 
@@ -43,17 +43,17 @@ def main():
             distanceFromNatives = (milesTraveled - distanceNativesTraveled)
 
         #check to see if natives are close
-        if distanceFromNatives < 15:
-            print('The natives are getting close!')
-        elif distanceFromNatives < 1:
-            print('The natives caught you!')
-            print('GAME OVER')
+        # if distanceFromNatives < 15:
+        #     print('The natives are getting close!')
+        # elif distanceFromNatives < 1:
+        #     print('The natives caught you!')
+        #     print('GAME OVER')
 
 
-        #check to see if you won
-        if milesTraveled > 199:
-            print('YOU ESCAPED AND WON THE GAME!')
-            done = True
+        # #check to see if you won
+        # if milesTraveled > 199:
+        #     print('YOU ESCAPED AND WON THE GAME!')
+        #     done = True
 
         #instructions
         print('A. Drink from your canteen.')
@@ -80,6 +80,7 @@ def main():
             print('your camel is happy')
             distanceNativesTraveled = distanceNativesTraveled + random.randint(7,14)
 
+
         #travel selections
         elif userChoice == 'C':
             fullSpeedTravelDistance = random.randint(10,20)
@@ -92,12 +93,20 @@ def main():
         elif userChoice == 'B':
             moderateSpeedTravelDistance = random.randint(5,12)
             milesTraveled = milesTraveled + moderateSpeedTravelDistance
-            print('You traveld',moderateSpeedTravelDistance,'miles')
+            print('You traveled',moderateSpeedTravelDistance,'miles')
             thirst += 1
             camelTiredness += 1
             distanceNativesTraveled = distanceNativesTraveled + random.randint(7, 14)
+        if userChoice == 'B' or userChoice == 'C':
+            oasis = random.randint(1,20)
+            if oasis == 5 and thirst > 4:
+                print('You found an oasis!')
+                drinksInCanteen = 3
+                thirst = 0
+                camelTiredness = 0
 
-        
+
+
         elif userChoice == 'A':
             if drinksInCanteen > 0:
                 drinksInCanteen -= 1
@@ -105,18 +114,42 @@ def main():
             else:
                 print('You don\'t have any drinks left in your canteen!')
 
+            if thirst > 6:
+                print('YOU DIED OF THIRST!')
+                done = True
+                break
+            elif thirst > 4:
+                print('You are thirsty!')
+
+
+
+            # check to see if natives are close
+        if distanceFromNatives < 15 and distanceFromNatives > 0:
+            print('The natives are getting close!')
+        elif distanceFromNatives < 1:
+            print('The natives caught you!')
+            print('GAME OVER')
+            done = True
+
+        #check to see if you won
+        if milesTraveled > 199:
+            print('YOU ESCAPED AND WON THE GAME!')
+            done = True
+
+
         #vital checks
-        # if thirst > 6:
-        #     print('YOU DIED OF THIRST!')
-        #     done = True
-        #     break
-        # elif thirst > 4:
-        #     print('You are thirsty!')
-        # if camelTiredness > 8:
-        #     print('Your camel is dead')
-        #     done = True
-        # elif camelTiredness > 5:
-        #     print('Your camel is getting tired')
+        if thirst > 6:
+            print('YOU DIED OF THIRST!')
+            done = True
+            break
+        elif thirst > 4:
+            print('You are thirsty!')
+        if camelTiredness > 8:
+            print('Your camel is dead')
+            print('GAME OVER')
+            done = True
+        elif camelTiredness > 5:
+            print('Your camel is getting tired')
 
 
 
