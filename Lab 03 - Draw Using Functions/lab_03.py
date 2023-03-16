@@ -70,22 +70,23 @@ def drawWater(x,y):
 
 #function to draw a fish
 def drawFish(x,y):
-    #drawing the fish
+    # drawing the fish
 
-    #tail fin
+    # tail fin
     arcade.draw_triangle_filled(x - 220, y + 70, x - 135, y, x - 220, y - 70, arcade.csscolor.DARK_SALMON)
-    #body
+    # body
     arcade.draw_ellipse_filled(x, y, 300, 150, arcade.csscolor.DARK_SALMON)
 
-    #body fin
+    # body fin
     arcade.draw_line(x - 30, y + 15, x - 70, y + 25, arcade.csscolor.BLACK, 2)
     arcade.draw_line(x - 70, y + 25, x - 70, y - 25, arcade.csscolor.BLACK, 2)
     arcade.draw_line(x - 70, y - 25, x - 30, y - 10, arcade.csscolor.BLACK, 2)
 
-    #eye and mouth
+    # eye and mouth
     arcade.draw_circle_filled(x + 100, y + 30, 10, arcade.csscolor.BLACK)
     arcade.draw_arc_filled(x + 120, y - 15, 25, -20, arcade.csscolor.BLACK, 0, 180)
 
-    #center of the fish is (300, 160)
+    # center of the fish is (300, 160)
+
 
 main()
