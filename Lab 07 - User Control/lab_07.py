@@ -77,9 +77,9 @@ class Sun:
 
     def update(self):
         self.position_y += self.change_y
-        if self.position_x < 0 and self.change_x < 0:
+        if self.position_x < 174 and self.change_x < 0:
             pass
-        elif self.position_x > SCREEN_WIDTH and self.change_x > 0:
+        elif self.position_x > 475 and self.change_x > 0:
             pass
         else:
             self.position_x += self.change_x
@@ -132,7 +132,6 @@ class MyGame(arcade.Window):
     def on_key_press(self, key, modifiers):
         """ Called whenever the user presses a key. """
         if key == arcade.key.LEFT:
-            print(self.sun.position_x)
             if self.sun.position_x < 0:
                 self.sun.change_x = 0
             else:
@@ -141,45 +140,12 @@ class MyGame(arcade.Window):
             #     pass
         elif key == arcade.key.RIGHT:
             self.sun.change_x = MOVEMENT_SPEED
-        elif key == arcade.key.UP:
-            self.sun.change_y = MOVEMENT_SPEED
-        elif key == arcade.key.DOWN:
-            self.sun.change_y = -MOVEMENT_SPEED
+
 
     def on_key_release(self, key, modifiers):
         """ Called whenever a user releases a key. """
         if key == arcade.key.LEFT or key == arcade.key.RIGHT:
             self.sun.change_x = 0
-        elif key == arcade.key.UP or key == arcade.key.DOWN:
-            self.sun.change_y = 0
-# class MyGame(arcade.Window):
-#     """ Our Custom Window Class"""
-#
-#     def __init__(self):
-#         """ Initializer """
-#
-#         # Call the parent class initializer
-#         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, "Lab 7 - User Control")
-#
-#     def on_draw(self):
-#         #backround using scene function
-#         scene()
-#
-#         class Fish:
-#             def __init__(self, position_x, position_y, radius, color):
-#                 # Take the parameters of the init function above,
-#                 # and create instance variables out of them.
-#                 self.position_x = position_x
-#                 self.position_y = position_y
-#                 self.radius = radius
-#                 self.color = color
-#
-#             def draw(self):
-#
-#                 drawFish(self.position_x, self.position_y)
-#         # finish drawing
-#         arcade.finish_render()
-#         # keeping the window open
 
 
 def main():
