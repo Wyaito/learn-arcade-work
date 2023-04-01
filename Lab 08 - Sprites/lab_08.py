@@ -107,7 +107,7 @@ class MyGame(arcade.Window):
             arcade.draw_text('YOU WON!',300,400, arcade.color.RED, 100)
 
     def on_mouse_motion(self, x, y, dx, dy):
-        """ Handle Mouse Motion """
+
 
         # Move the center of the player sprite to match the mouse x, y
         self.player_sprite.center_x = x
@@ -167,7 +167,7 @@ class MyGame(arcade.Window):
             self.bad_sprite.center_y = random.randint(0,800)
             self.bad_list.append(self.bad_sprite)
 
-
+" Movement and game logic """
 def main():
     """ Main method """
     window = MyGame()
