@@ -77,48 +77,55 @@ def main():
 
         print("You can go North, South, East, or West\nOr you can exit the game.")
         # getting user input and setting it to all caps
-        userChoice = input("What direction do you want to go? ")
-        userChoice = userChoice.upper()
-
+        userCommand = input("What direction do you want to go? ")
+        userCommand = userCommand.upper()
+        command_words = userCommand.split(" ")
         # If statements to check user input
 
-        # check if north
-        if userChoice == "N" or userChoice == "NORTH":
-            nextRoom = room_list[current_room].north
-            if nextRoom == None:
-                print("You can't go that way")
-            else:
-                current_room = nextRoom
+
+        # --- PARSING USER COMMANDS ---
+
+##############################################################################################################
+        # -- MOVE COMMAND --
+        if command_words[0] == 'MOVE':
+
+            # check if north
+            if command_words[1] == "N" or command_words[1] == "NORTH":
+                nextRoom = room_list[current_room].north
+                if nextRoom == None:
+                    print("You can't go that way")
+                else:
+                    current_room = nextRoom
 
 
-        # check if south
-        elif userChoice == "S" or userChoice == "SOUTH":
-            nextRoom = room_list[current_room].south
-            if nextRoom == None:
-                print("You can't go that way")
-            else:
-                current_room = nextRoom
+            # check if south
+            elif command_words[1] == "S" or command_words[1] == "SOUTH":
+                nextRoom = room_list[current_room].south
+                if nextRoom == None:
+                    print("You can't go that way")
+                else:
+                    current_room = nextRoom
 
 
-        # check if east
-        elif userChoice == "E" or userChoice == "EAST":
-            nextRoom = room_list[current_room].east
-            if nextRoom == None:
-                print("You can't go that way")
-            else:
-                current_room = nextRoom
+            # check if east
+            elif command_words[1] == "E" or command_words[1] == "EAST":
+                nextRoom = room_list[current_room].east
+                if nextRoom == None:
+                    print("You can't go that way")
+                else:
+                    current_room = nextRoom
 
 
-        # check if west
-        elif userChoice == "W" or userChoice == "WEST":
-            nextRoom = room_list[current_room].west
-            if nextRoom == None:
-                print("You can't go that way")
-            else:
-                current_room = nextRoom
-
+            # check if west
+            elif command_words[1] == "W" or command_words[1] == "WEST":
+                nextRoom = room_list[current_room].west
+                if nextRoom == None:
+                    print("You can't go that way")
+                else:
+                    current_room = nextRoom
+#########################################################################################################
         # check if exit
-        elif userChoice == "X" or userChoice == "EXIT":
+        elif command_words[0] == "X" or command_words[0] == "EXIT":
             done = True
 
 
