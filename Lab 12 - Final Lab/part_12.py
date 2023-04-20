@@ -22,7 +22,7 @@ def main():
 
     # -- CREATING ITEMS --
     # sword
-    item = Item(2, 'this is a sharp broadsword, be careful where you swing it', 'Sword')
+    item = Item(2, 'this is a sharp sword, be careful where you swing it', 'sword')
     item_list.append(item)
     # compass
     item = Item(1, "this compass can tell you what direction you're going", 'compass')
@@ -124,6 +124,58 @@ def main():
                 else:
                     current_room = nextRoom
 #########################################################################################################
+        # GET COMMAND
+
+        elif command_words[0] == 'GET':
+            targetItem = command_words[1].lower()
+            i = 0
+            foundItem = False
+            while i < len(item_list):
+                if item_list[i].name == targetItem and item_list[i].roomNumber == current_room:
+                    print(item_list[i].name, 'added to your inventory')
+                    item = Item(-1,item_list[i].description,item_list[i].name)
+                    item_list.append(item)
+                    del item_list[i]
+                    foundItem = True
+                    i + 1
+
+                else:
+                    i += 1
+            if foundItem == False:
+                print("There isn't a", targetItem,"in this room")
+#########################################################################################################
+        # INVENTORY COMMAND
+        elif command_words[0] == 'INVENTORY':
+            i = 0
+            print('Items in your inventory:')
+            while i < len(item_list):
+                if item_list[i].roomNumber == -1:
+                    print(item_list[i].name)
+                    i += 1
+                else:
+                    i += 1
+###########################################################################################################
+        # DROP ITEM COMMAND
+        elif command_words[0] == 'DROP':
+            i = 0
+            hasItem = False
+            targetItem = command_words[1].lower()
+            while i < len(item_list):
+                if item_list[i].roomNumber == -1 and item_list[i].name == targetItem:
+                    item = Item(current_room,item_list[i].description,item_list[i].name)
+                    item_list.append(item)
+                    del item_list[i]
+                    i += 1
+                    hasItem = True
+                    print(targetItem, "dropped")
+                else:
+                    i += 1
+            if hasItem == False:
+                print('Item not found in inventory')
+
+
+
+
         # check if exit
         elif command_words[0] == "X" or command_words[0] == "EXIT":
             done = True
