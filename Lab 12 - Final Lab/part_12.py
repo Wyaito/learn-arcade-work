@@ -1,3 +1,5 @@
+from compass import Compass
+
 class Room:
     def __init__(self, rNumber, description, north, south, east, west):
         self.rNumber = rNumber
@@ -172,6 +174,16 @@ def main():
                     i += 1
             if hasItem == False:
                 print('Item not found in inventory')
+
+       # -- USE COMMAND -- ################################################################################
+        elif command_words[0] == 'USE':
+            targetItem = command_words[1].lower()
+            if targetItem == 'compass':
+                Compass(current_room)
+            else:
+                print('s')
+
+
 
 
 
