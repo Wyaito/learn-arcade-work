@@ -1,5 +1,5 @@
 from compass import Compass
-
+from help import Help
 class Room:
     def __init__(self, rNumber, description, north, south, east, west, northeast, southwest):
         self.rNumber = rNumber
@@ -206,7 +206,14 @@ def main():
         elif command_words[0] == 'USE':
             targetItem = command_words[1].lower()
             if targetItem == 'compass':
-                Compass(current_room)
+                i = 0
+                while i < len(item_list):
+                    if item_list[i].roomNumber == -1 and item_list[i].name == 'compass':
+                        Compass(current_room)
+                        i += 1
+                    else:
+                        i += 1
+
             elif targetItem == 'key':
                 if current_room == 6:
                     i = 0
@@ -222,8 +229,10 @@ def main():
                     print("no chest was affected, either you don't have a key or you're not in a room with a chest")
 
             else:
-                pass
-
+                print('invalid item or command')
+################################################################################################################################
+        # --- HELP COMMAND --- #
+        
 
 
 
@@ -235,7 +244,7 @@ def main():
 
 
         else:
-            print("That is not a valid command")
+            print("INVALID ITEM")
 
 
 main()
