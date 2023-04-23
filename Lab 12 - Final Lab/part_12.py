@@ -1,5 +1,7 @@
 from compass import Compass
 from help import Help
+
+
 class Room:
     def __init__(self, rNumber, description, north, south, east, west, northeast, southwest):
         self.rNumber = rNumber
@@ -11,6 +13,7 @@ class Room:
         self.northeast = northeast
         self.southwest = southwest
 
+
 class Item:
     def __init__(self, roomNumber, description, name):
         self.roomNumber = roomNumber
@@ -18,27 +21,47 @@ class Item:
         self.name = name
 
 
+# class Monster:
+#     def __init__(self, roomNumber,description, damageDelt):
+#         #self.health = health
+#         self.roomNumber = roomNumber
+#         self.description = description
+#         self.damageDelt = damageDelt
+
 def main():
-    print('this is main yo')
+    # print('this is main yo')
     room_list = []
     item_list = []
+    # monster_list = []
+    melted = False
     chestlock = True
+    swordHealth = 5
+    playerHealth = 10
+    monsterHealth = 5
     # -- CREATING ITEMS --
     # sword
-    item = Item(2, 'this is a sharp sword, be careful where you swing it', 'sword')
+    item = Item(2, 'there is a sword in this room, you can take it for protection', 'sword')
     item_list.append(item)
     # compass
-    item = Item(1, "this compass can tell you what direction you're going", 'compass')
+    item = Item(1, "there is a compass here, this could help you navigate and get hints", 'compass')
     item_list.append(item)
-    #blowtorch
+    # blowtorch
     item = Item(7, 'this blowtorch can be used to cut through metal', 'blowtorch')
     item_list.append(item)
-    #key
-    item = Item(5, 'this key looks like it could go to a chest', 'key')
+    # key
+    item = Item(5, 'there is a key in this room that looks like it could be used for a chest', 'key')
     item_list.append(item)
     # -- CREATING ROOMS --
+    item = Item(3, 'this monster will do damage to you every turn in this room,  use your sword to attack', 'monster')
+    item_list.append(item)
+
+    # -- CREATING THE MONSTER --
+    # $MONSTER = Monster(3, "This monster looks dangerous. If you have a sword you can use the attack command, if you don't you should probably turn back.", 1 )
+    # monster_list.append(MONSTER)
+
     # ROOM 0
-    room = Room(0, "You're in a dark room, you can see the light of a doorway to the east", None, None, 1, None, None, None)
+    room = Room(0, "You're in a dark room, you can see the light of a doorway to the east", None, None, 1, None, None,
+                None)
     room_list.append(room)
     # ROOM 1
     room = Room(1,
@@ -59,15 +82,21 @@ def main():
                 3, 6, 5, None, None)
     room_list.append(room)
     # ROOM 5
-    room = Room(5, "This is just a boring laundry room\nYou can only leave the way you came in.", None, None, 4, None, None, None)
+    room = Room(5, "This is just a boring laundry room\nYou can only leave the way you came in.", None, None, 4, None,
+                8, None)
     room_list.append(room)
     # ROOM 6
-    room = Room(6, "this is a movie theatre room.\nYou can only leave the way you came in.\n there is a chest in the wall in the Northeast corner of the room, you can unlock it if you have a key.", None, None, None, 4,7, None)
+    room = Room(6,
+                "this is a movie theatre room.\nYou can only leave the way you came in.\n there is a chest in the wall in the Northeast corner of the room, you can unlock it if you have a key.",
+                None, None, None, 4, 7, None)
     room_list.append(room)
     done = False
     current_room = 0
     # ROOM 7 OR CHEST ROOM
-    room = Room(7, "this chest has a blowtorch, take this item, it might come it might come in handy later.",None, None, None, None, None, 6)
+    room = Room(7, "this chest has a blowtorch, take this item, it might come it might come in handy later.", None,
+                None, None, None, None, 6)
+    room_list.append(room)
+    room = Room(8, "winners room", None, None, None, None, None, None)
     room_list.append(room)
     while done == False:
 
@@ -76,7 +105,7 @@ def main():
         print('')
         print(room_list[current_room].description)
         print('')
-        print(current_room)
+        print('health: ', playerHealth)
         i = 0
         while i < len(item_list):
             if item_list[i].roomNumber != room_list[current_room].rNumber:
@@ -86,19 +115,18 @@ def main():
                 print(item_list[i].description)
                 i += 1
 
-        print("You can go North, South, East, or West\nOr you can exit the game.")
+        print("use the command 'help' for a list of commands ")
         # getting user input and setting it to all caps
-        userCommand = input("What direction do you want to go? ")
+        userCommand = input("What is your command?: ")
         userCommand = userCommand.upper()
 
         command_words = userCommand.split(" ")
 
         # If statements to check user input
 
-
         # --- PARSING USER COMMANDS ---
 
-##############################################################################################################
+        ##############################################################################################################
         # -- MOVE COMMAND --
         if command_words[0] == 'MOVE':
 
@@ -144,6 +172,11 @@ def main():
                         print("you can't go that way")
                     else:
                         current_room = nextRoom
+                elif melted == True and current_room == 5:
+                    if nextRoom == None:
+                        print("you can't go that way")
+                    else:
+                        current_room = nextRoom
             # check if southwest
             elif command_words[1] == "SW" or command_words[1] == "SOUTHWEST":
                 nextRoom = room_list[current_room].southwest
@@ -152,7 +185,8 @@ def main():
                 else:
                     current_room = nextRoom
 
-#########################################################################################################
+
+        #########################################################################################################
         # GET COMMAND
 
         elif command_words[0] == 'GET':
@@ -162,17 +196,17 @@ def main():
             while i < len(item_list):
                 if item_list[i].name == targetItem and item_list[i].roomNumber == current_room:
                     print(item_list[i].name, 'added to your inventory')
-                    item = Item(-1,item_list[i].description,item_list[i].name)
+                    item = Item(-1, item_list[i].description, item_list[i].name)
                     item_list.append(item)
                     del item_list[i]
                     foundItem = True
-                    i + 1
+                    i += 1
 
                 else:
                     i += 1
             if foundItem == False:
-                print("There isn't a", targetItem,"in this room")
-#########################################################################################################
+                print("There isn't a", targetItem, "in this room")
+        #########################################################################################################
         # INVENTORY COMMAND
         elif command_words[0] == 'INVENTORY':
             i = 0
@@ -183,7 +217,7 @@ def main():
                     i += 1
                 else:
                     i += 1
-###########################################################################################################
+        ###########################################################################################################
         # DROP ITEM COMMAND
         elif command_words[0] == 'DROP':
             i = 0
@@ -191,7 +225,7 @@ def main():
             targetItem = command_words[1].lower()
             while i < len(item_list):
                 if item_list[i].roomNumber == -1 and item_list[i].name == targetItem:
-                    item = Item(current_room,item_list[i].description,item_list[i].name)
+                    item = Item(current_room, item_list[i].description, item_list[i].name)
                     item_list.append(item)
                     del item_list[i]
                     i += 1
@@ -202,17 +236,19 @@ def main():
             if hasItem == False:
                 print('Item not found in inventory')
 
-# -- USE COMMAND -- ################################################################################
+        # -- USE COMMAND -- ################################################################################
         elif command_words[0] == 'USE':
             targetItem = command_words[1].lower()
             if targetItem == 'compass':
                 i = 0
                 while i < len(item_list):
-                    if item_list[i].roomNumber == -1 and item_list[i].name == 'compass':
-                        Compass(current_room)
-                        i += 1
+                    if item_list[i].roomNumber == -1 and item_list[i].name == targetItem:
+                        if item_list[i].roomNumber == -1 and item_list[i].name == 'compass':
+                            Compass(current_room)
+                            i += 1
                     else:
                         i += 1
+
 
             elif targetItem == 'key':
                 if current_room == 6:
@@ -228,23 +264,104 @@ def main():
                 elif chestlock == True:
                     print("no chest was affected, either you don't have a key or you're not in a room with a chest")
 
-            else:
-                print('invalid item or command')
-################################################################################################################################
-        # --- HELP COMMAND --- #
-        
+
+            elif targetItem == 'sword':
+                if swordHealth > 0:
+
+                    if current_room == 3:
+                        i = 0
+                        while i < len(item_list):
+                            if item_list[i].roomNumber == -1 and item_list[i].name == 'sword':
+                                monsterHealth -= 2
+                                swordHealth -= 1
+                                print('you hit the monster!', "monster health", monsterHealth)
+
+                                i += 1
+                            else:
+                                i += 1
+
+                    else:
+                        print('there is nothing to swing at')
+            elif targetItem == 'blowtorch':
+                if current_room == 5:
+                    i = 0
+                    while i < len(item_list):
+                        if item_list[i].roomNumber != -1 and item_list[i].name != 'blowtorch':
+                            i += 1
+                        else:
+                            melted = True
+                            print('the door melts')
+                            i += 1
+                else:
+                    print("no affect, you either dont have a blowtorch or you arent in a room where you can use one")
+
+        elif command_words[0] == 'HELP':
+            Help()
 
 
 
 
 
-        # check if exit
-        elif command_words[0] == "X" or command_words[0] == "EXIT":
+        elif command_words[0] == "X" or command_words[0] == "EXIT" or playerHealth < 1:
             done = True
 
 
+
+
+
+
         else:
-            print("INVALID ITEM")
+            print('invalid item or command')
+        ################################################################################################################################
+        # --- HELP COMMAND --- #
+
+        # # check if exit
+        # elif command_words[0] == "X" or command_words[0] == "EXIT" or playerHealth < 1:
+        #     done = True
+
+        # else:
+        # print("INVALID ITEM")
+
+        # healthupdates
+
+        if monsterHealth < 1:
+            i = 0
+            while i < len(item_list):
+                if item_list[i].name == 'monster':
+                    del item_list[i]
+                    i += 1
+                else:
+                    i += 1
+        if current_room == 3:
+            i = 0
+            while i < len(item_list):
+                if item_list[i].name == 'monster':
+                    print("the monster hit you! you took 1 damage")
+                    playerHealth -= 1
+                    i += 1
+                else:
+                    i += 1
+
+        if swordHealth < 1:
+            i = 0
+            while i < len(item_list):
+                if item_list[i].name == "sword":
+                    del item_list[i]
+                    i += 1
+                else:
+                    i += 1
+
+        if playerHealth < 1:
+            print("YOU DIED!")
+            done = True
+            pass
+            # loss()
+
+        if current_room == 8:
+            a = 6
+            while a > 0:
+                print('YOU ESCPAED AND WON THE GAME')
+                a -= 1
 
 
 main()

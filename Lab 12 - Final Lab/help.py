@@ -16,3 +16,5 @@ exit     exits game
 
 
 """
+    print(a)
+Help()
